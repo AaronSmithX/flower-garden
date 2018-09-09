@@ -6,9 +6,18 @@ public class Garden {
 	
 	private ArrayList<Flower> flowers = new ArrayList<Flower>();
 	
-	public Garden() {
-		this.flowers.add(new Flower());
-		this.flowers.add(new Flower());
+	public Garden () {
+		// Empty constructor - no extra setup
+	}
+	
+	/**
+	 * Creates a new Garden with <b>flowerCount</b> flowers in it.
+	 * @param flowerCount
+	 */
+	public Garden(int flowerCount) {
+		for (int i = 0; i < flowerCount; i++) {
+			this.flowers.add(new Flower());
+		}
 	}
 
 	public ArrayList<Flower> getFlowers() {
@@ -23,6 +32,12 @@ public class Garden {
 
 	public void fertilizeFlower(int index) {
 		flowers.get(index).fertilize();
+	}
+
+	public void tick() {
+		for (Flower flower : flowers) {
+			flower.tick();
+		}
 	}
 
 }
