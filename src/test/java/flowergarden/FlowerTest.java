@@ -1,6 +1,7 @@
 package flowergarden;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertThat;
 
@@ -35,5 +36,51 @@ public class FlowerTest {
 		int hydrationAfter = flower.getHydration();
 		// Assert
 		assertThat(hydrationAfter, lessThan(hydrationBefore));
+	}
+	
+	@Test
+	public void shouldBeAbleToGetSoilHealth100FromNewFlower() {
+		// Arrange
+		Flower flower = new Flower();
+		// Act
+		int soilHealth = flower.getSoilHealth();
+		// Assert
+		assertThat(soilHealth, is(100));
+	}
+	
+	@Test
+	public void shouldDecreaseSoilHealthOnTick() {
+		// Arrange
+		Flower flower = new Flower();
+		// Act
+		int soilHealthBefore = flower.getSoilHealth();
+		flower.tick();
+		int soilHealthAfter = flower.getSoilHealth();
+		// Assert
+		assertThat(soilHealthAfter, lessThan(soilHealthBefore));
+	}
+	
+	@Test
+	public void shouldIncreaseHydrationWhenWatered() {
+		// Arrange
+		Flower flower = new Flower();
+		// Act
+		int hydrationBefore = flower.getHydration();
+		flower.water();
+		int hydrationAfter = flower.getHydration();
+		// Assert
+		assertThat(hydrationAfter, is(greaterThan(hydrationBefore)));
+	}
+	
+	@Test
+	public void shouldIncreaseSoilHealthWhenFertilized() {
+		// Arrange
+		Flower flower = new Flower();
+		// Act
+		int soilHealthBefore = flower.getSoilHealth();
+		flower.fertilize();
+		int soilHealthAfter = flower.getSoilHealth();
+		// Assert
+		assertThat(soilHealthAfter, is(greaterThan(soilHealthBefore)));
 	}
 }
